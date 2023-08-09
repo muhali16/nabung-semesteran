@@ -3,8 +3,9 @@
 namespace App\Services\Milestone;
 
 use App\Repositories\Milestone\MilestoneRepository;
+use App\Services\Service;
 
-class MilestoneServiceImplements implements MilestoneService
+class MilestoneServiceImplements extends Service implements MilestoneService
 {
     public $mainRepository;
 

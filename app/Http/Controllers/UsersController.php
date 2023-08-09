@@ -27,7 +27,9 @@ class UsersController extends Controller
      */
     public function index()
     {
-        return view("dashboard.profile.index");
+        return view("profile.index", [
+            "title" => "Profile",
+        ]);
     }
 
     /**

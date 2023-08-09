@@ -2,7 +2,9 @@
 
 namespace App\Repositories\Milestone;
 
-interface MilestoneRepository
+use App\Repositories\Repository;
+
+interface MilestoneRepository extends Repository
 {
     public function getTotalBalanceAllUsers();
 

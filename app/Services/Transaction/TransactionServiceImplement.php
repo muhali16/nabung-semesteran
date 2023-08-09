@@ -59,11 +59,11 @@ class TransactionServiceImplement extends \App\Services\Service implements Trans
 
     public function userTransactionByDay($date, $userId): array
     {
-        $date = date('Y-d-m \0\0:\0\0:\0\0', strtotime($date));
+        $date = date("Y-m-d 00:00:00", strtotime($date));
         $userTransactions = $this->mainRepository->getByUserId($userId);
         $data = [];
         foreach ($userTransactions as $transaction){
-            $transactionDate = date('Y-m-d \0\0:\0\0:\0\0', strtotime($transaction->created_at));
+            $transactionDate = date('Y-m-d 00:00:00', strtotime($transaction->created_at));
             if ($transactionDate == $date)
             {
                 $data[] = $transaction;

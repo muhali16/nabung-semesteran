@@ -4,8 +4,9 @@ namespace App\Repositories\Milestone;
 
 use App\Models\User;
 use App\Models\Wallet;
+use App\Repositories\Eloquent;
 
-class MilestoneRepositoryImplement implements MilestoneRepository
+class MilestoneRepositoryImplement extends Eloquent implements MilestoneRepository
 {
     public $model;
     public $users;

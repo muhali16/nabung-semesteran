@@ -2,7 +2,9 @@
 
 namespace App\Services\Milestone;
 
-interface MilestoneService
+use App\Services\BaseService;
+
+interface MilestoneService extends BaseService
 {
     public function getTotalBalanceAllUsers();
 

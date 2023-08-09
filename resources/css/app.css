@@ -1,3 +1,23 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.hover-nav {
+    @apply rounded-full
+}
+.selected-nav {
+    @apply border-2 border-primary p-3 bg-secondary translate-y-1
+}
+.hover-desc-nav {
+    @apply hidden text-white text-sm
+}
+.desc-nav {
+    @apply block translate-y-2
+}
+.button-primary {
+    @apply border border-primary px-3 py-1 bg-primary text-white hover:bg-primary/50
+}
+.input-primary {
+    @apply w-full px-3 py-1 text-darksilver bg-white rounded-md focus:outline-none focus:ring-2 focus:ring-primary placeholder:text-dark/60 placeholder:text-sm disabled:bg-white/50 disabled:text-dark/60
+}

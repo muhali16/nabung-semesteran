@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Services\Milestone\MilestoneService;
 use App\Services\Wallet\WalletService;
+use Illuminate\Support\Facades\Auth;
 
 class MilestoneController extends Controller
 {
@@ -17,21 +18,28 @@ class MilestoneController extends Controller
 
     public function index()
     {
-        $totalBalance = $this->milestoneService->getTotalBalanceAllUsers();
-        $totalValidUsers = $this->milestoneService->getTotalValidUsers();
-        $userBalance = ($this->walletService->getByUserId(auth()->user()->id))->balance;
         $targetUserBalance = 500000;
+
+        $totalValidUsers = $this->milestoneService->getTotalValidUsers();
+        $totalBalance = $this->milestoneService->getTotalBalanceAllUsers();
         $targetTotalBalance = $this->milestoneService->getTargetTotalBalance($targetUserBalance, $totalValidUsers);
         $percentageTotalBalance = $this->milestoneService->getTotalPercentageBalance($totalBalance, $targetTotalBalance);
-        $percentageUserBalance = $this->milestoneService->getUserPercentageBalance($userBalance, $targetUserBalance);
-        return view("dashboard.milestone.index", [
+        $data = [
+
+            "title" => "Milestone",
             "totalBalance" => $totalBalance,
             "totalValidUsers" => $totalValidUsers,
             "targetBalance" => $targetTotalBalance,
             "targetUserBalance" => $targetUserBalance,
             "percentageTotalBalance" => $percentageTotalBalance,
-            "userBalance" => $userBalance,
-            "percentageUserBalance" => $percentageUserBalance,
-        ]);
+        ];
+        if (Auth::check()) {
+            $userBalance = ($this->walletService->getByUserId(auth()->user()->id))->balance;
+            $percentageUserBalance = $this->milestoneService->getUserPercentageBalance($userBalance, $targetUserBalance);
+            $data['userBalance' ] = $userBalance;
+            $data['percentageUserBalance'] = $percentageUserBalance;
+        }
+
+        return view("milestone.index", $data);
     }
 }
